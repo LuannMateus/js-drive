@@ -23,6 +23,8 @@ const io = new Server(server, {
   },
 });
 
+routes.setSocketInstance(io);
+
 io.on('connection', (socket) => {
   logger.info(`Someone connected: ${socket.id}`);
 });
