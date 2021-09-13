@@ -8,9 +8,8 @@
     "node": "16"
   },
   "scripts": {
-    "start": "node src/index.js",
-    "prod": "NODE_ENV=production node src/index.js",
-    "heroku-postbuild": "npm run prod",
+    "start": "mkdir -p downloads && node src/index.js",
+    "prod": "mkdir -p downloads && NODE_ENV=production node src/index.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --runInBand",
     "test:watch": "npm test -- --watchAll",
     "test:cov": "npm test -- --no-cache --coverage"
