@@ -8,7 +8,6 @@ import Routes from './routes.js';
 let localHostSSL = {};
 
 const PORT = process.env.PORT || 3000;
-const HOSTNAME = 'localhost';
 
 const isProduction = process.env.NODE_ENV === 'production';
 process.env.USER = process.env.USER ?? 'system_user';
@@ -19,8 +18,6 @@ if (!isProduction) {
     cert: fs.readFileSync('./certificates/cert.pem'),
   };
 }
-
-
 
 const protocol = isProduction ? http : https;
 const ssConfig = isProduction ? {} : localHostSSL;
@@ -38,10 +35,6 @@ const io = new Server(server, {
 
 routes.setSocketInstance(io);
 
-io.on('connection', (socket) => {
-  logger.info(`Someone connected: ${socket.id}`);
-});
-
 const startServer = () => {
   console.log(server.address());
   const { address, port } = server.address();
@@ -51,4 +44,4 @@ const startServer = () => {
   logger.info(`App is running at ${protocol}://${address}:${port}`);
 };
 
-server.listen(PORT, HOSTNAME, startServer);
+server.listen(PORT, startServer);
