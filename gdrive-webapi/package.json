@@ -10,6 +10,7 @@
   "scripts": {
     "start": "node src/index.js",
     "prod": "NODE_ENV=production node src/index.js",
+    "heroku-postbuild": "npm run prod --prod",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --runInBand",
     "test:watch": "npm test -- --watchAll",
     "test:cov": "npm test -- --no-cache --coverage"
