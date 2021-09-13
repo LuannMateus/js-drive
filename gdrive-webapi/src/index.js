@@ -5,17 +5,21 @@ import { logger } from './logger.js';
 import { Server } from 'socket.io';
 import Routes from './routes.js';
 
+let localHostSSL = {};
+
 const PORT = process.env.PORT || 3000;
 const HOSTNAME = 'localhost';
 
 const isProduction = process.env.NODE_ENV === 'production';
 process.env.USER = process.env.USER ?? 'system_user';
 
+if (!isProduction) {
+  localHostSSL = {
+    key: fs.readFileSync('./certificates/key.pem'),
+    cert: fs.readFileSync('./certificates/cert.pem'),
+  };
+}
 
-const localHostSSL = {
-  key: fs.readFileSync('./certificates/key.pem'),
-  cert: fs.readFileSync('./certificates/cert.pem'),
-};
 
 
 const protocol = isProduction ? http : https;
